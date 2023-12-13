@@ -13,5 +13,5 @@ struct Arguments {
 fn main() {
     let args = Arguments::parse();
     let ending = if args.omit_newline { "" } else { "\n" };
-    println!("{}{}", args.text.join(" "), ending);
+    print!("{}{}", args.text.join(" "), ending);
 }
