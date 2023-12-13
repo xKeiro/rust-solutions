@@ -1,3 +1,8 @@
+use clap::Parser;
+
 fn main() {
-    println!("Hello, world!");
+    if let Err(e) = catr::run(&catr::Args::parse()) {
+        eprintln!("{}", e);
+        std::process::exit(1);
+    }
 }
