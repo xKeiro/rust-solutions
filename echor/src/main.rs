@@ -1,22 +1,17 @@
-use clap::{Command, Arg};
+use clap::Parser;
+
+#[derive(Parser)]
+#[command(author, version, about, long_about = None)]
+#[command(next_line_help = true)]
+struct Arguments {
+    #[arg(value_name = "TEXT", help = "Input text", required = true)]
+    text: Vec<String>,
+    #[arg(short = 'n', help = "Do not print newline")]
+    omit_newline: bool,
+}
 
 fn main() {
-    let matches = Command::new("echor")
-        .version("0.1.0")
-        .author("Kevin Németh <nkevin@outlook.hu>")
-        .about("Rust echo.")
-        .arg(
-            Arg::new("text")
-                .value_name("TEXT")
-                .help("Input text")
-                .required(true),
-        )
-        .arg(
-            Arg::new("omit_newline")
-                .short('n')
-                .help("Do not print newline")
-        )
-        .get_matches();
-
-    println!("{:#?}", matches)
+    let args = Arguments::parse();
+    let ending = if args.omit_newline { "" } else { "\n" };
+    println!("{}{}", args.text.join(" "), ending);
 }
