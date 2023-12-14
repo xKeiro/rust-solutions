@@ -19,18 +19,18 @@ pub struct Args {
 
 pub fn run(args: &Args) -> MyResult<()> {
     for filename in &args.files {
-        process_file(&filename, &args)?;
+        process_file(filename, args)?;
     }
     Ok(())
 }
 
 fn process_file(filename: &str, args: &Args) -> MyResult<()> {
-    match open(&filename) {
+    match open(filename) {
         Err(err) => {
             eprintln!("Failed to open {}: {}", filename, err);
             Ok(())
         }
-        Ok(file) => process_lines(file, &args),
+        Ok(file) => process_lines(file, args),
     }
 }
 
